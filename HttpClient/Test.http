@@ -1,0 +1,23 @@
+@baseUrl = http://localhost:7071/api/user
+@contentType = application/json
+
+@firstName = Test
+@lastName = Last
+
+# @name createUser
+POST {{baseUrl}} HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "FirstName": "{{firstName}}",
+    "LastName": "{{lastName}}"
+}
+
+###
+@userId = {{createUser.response.body.$}}
+
+###
+GET {{baseUrl}}/{{userId}} HTTP/1.1
+
+###
+GET {{baseUrl}}?id={{userId}} HTTP/1.1
